@@ -10,8 +10,7 @@ from typing import List, Tuple
 import numpy as np
 from tensorflow.keras.models import load_model
 
-# Path to the saved model, relative to this file so it works regardless of
-# where the app is launched from.
+
 MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "model.keras"
 
 IMAGE_HEIGHT = 28
@@ -20,13 +19,11 @@ IMAGE_CHANNELS = 1
 
 
 class ModelService:
-    """Small wrapper that keeps a single loaded model in memory."""
 
     def __init__(self) -> None:
         self._model = None
 
     def load(self) -> None:
-        """Load the model from disk. Called once when the API starts up."""
         if not MODEL_PATH.exists():
             raise FileNotFoundError(
                 f"No model file found at {MODEL_PATH}. "
@@ -39,14 +36,7 @@ class ModelService:
         return self._model is not None
 
     def predict(self, pixels: List[float]) -> Tuple[int, float, List[float]]:
-        """
-        Run a prediction on a flattened, normalized 28x28 image.
 
-        Returns:
-            predicted_digit: the model's top prediction (0-9)
-            confidence: probability of the top prediction
-            probabilities: probability for every digit, 0 through 9
-        """
         if self._model is None:
             raise RuntimeError("Model has not been loaded yet.")
 
