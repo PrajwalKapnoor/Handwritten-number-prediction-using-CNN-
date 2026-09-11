@@ -17,7 +17,6 @@ from schemas import HealthResponse, PredictionRequest, PredictionResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    """Load the model once when the app starts, before any requests arrive."""
     model_service.load()
     yield
 
@@ -27,13 +26,11 @@ app = FastAPI(title="Digit Recognition API", lifespan=lifespan)
 
 @app.get("/health", response_model=HealthResponse)
 def health_check() -> HealthResponse:
-    """Lets the frontend (or anyone) check that the API and model are ready."""
     return HealthResponse(status="ok", model_loaded=model_service.is_loaded)
 
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict_digit(request: PredictionRequest) -> PredictionResponse:
-    """Predict which digit (0-9) a preprocessed image represents."""
     try:
         digit, confidence, probabilities = model_service.predict(request.pixels)
     except RuntimeError as exc:
