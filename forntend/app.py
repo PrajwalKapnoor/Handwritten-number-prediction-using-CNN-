@@ -18,9 +18,6 @@ from PIL import Image
 API_URL = "http://localhost:8000/predict"
 
 IMAGE_SIZE = (28, 28)
-# If the average pixel brightness is above this, we assume the image is
-# dark strokes on a light background and invert it (MNIST is the opposite:
-# light strokes on a dark background).
 INVERSION_THRESHOLD = 127
 
 
