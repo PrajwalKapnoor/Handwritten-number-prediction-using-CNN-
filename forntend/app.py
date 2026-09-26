@@ -2,7 +2,7 @@
 Streamlit frontend for handwritten digit recognition.
 
 Flow:
-    1. User uploads an image.
+    1. User uploads an number image.
     2. Image is preprocessed to match what the CNN was trained on.
     3. Preprocessed pixels are sent to the FastAPI /predict endpoint.
     4. Prediction and confidence are displayed.
