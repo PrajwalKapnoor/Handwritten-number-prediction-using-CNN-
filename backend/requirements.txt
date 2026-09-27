@@ -1,1 +1,8 @@
 
+uvicorn[standard]
+pydantic
+streamlit
+tensorflow
+numpy
+pillow
+requests
