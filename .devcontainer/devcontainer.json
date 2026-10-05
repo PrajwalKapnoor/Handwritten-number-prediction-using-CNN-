@@ -21,7 +21,7 @@
   "postAttachCommand": {
     "server": "streamlit run forntend/app.py --server.enableCORS false --server.enableXsrfProtection false"
   },
-  "portsAttributes": {
+  "portsAttributes": {  
     "8501": {
       "label": "Application",
       "onAutoForward": "openPreview"
